@@ -1,3 +1,12 @@
+// =========================
+// API CONFIGURATION
+// =========================
+
+// Local backend:
+// const API_URL = "http://localhost:3000";
+
+// Production backend:
+// Replace this with your deployed backend URL.
 const API_URL = "http://localhost:3000";
 
 
@@ -129,7 +138,6 @@ function showHome() {
         .getElementById("detailsScreen")
         .classList.add("hidden");
 
-
     document
         .getElementById("homeNav")
         .classList.add("active");
@@ -137,7 +145,6 @@ function showHome() {
     document
         .getElementById("aiNav")
         .classList.remove("active");
-
 
     window.scrollTo({
         top: 0,
@@ -160,7 +167,6 @@ function showAiPicks() {
         .getElementById("detailsScreen")
         .classList.add("hidden");
 
-
     document
         .getElementById("homeNav")
         .classList.remove("active");
@@ -168,7 +174,6 @@ function showAiPicks() {
     document
         .getElementById("aiNav")
         .classList.add("active");
-
 
     window.scrollTo({
         top: 0,
@@ -188,6 +193,10 @@ function scrollToRecommendations() {
             "recommendationsSection"
         );
 
+    if (!section) {
+        return;
+    }
+
     section.scrollIntoView({
         behavior: "smooth"
     });
@@ -205,12 +214,10 @@ function createMovieCard(movie) {
 
     card.className = "movie-card";
 
-
     const poster =
         document.createElement("div");
 
     poster.className = "movie-poster";
-
 
     poster.style.setProperty(
         "--poster-light",
@@ -221,7 +228,6 @@ function createMovieCard(movie) {
         "--poster-dark",
         movie.dark || "#202024"
     );
-
 
     poster.innerHTML = `
 
@@ -243,15 +249,12 @@ function createMovieCard(movie) {
 
     `;
 
-
     card.appendChild(poster);
-
 
     card.addEventListener(
         "click",
         () => showMovieDetails(movie)
     );
-
 
     return card;
 }
@@ -269,9 +272,11 @@ function loadMovieSection(
     const container =
         document.getElementById(elementId);
 
+    if (!container) {
+        return;
+    }
 
     container.innerHTML = "";
-
 
     movies.forEach(movie => {
 
@@ -297,11 +302,9 @@ function convertApiMovie(movieName) {
             movie => movie.title === movieName
         );
 
-
     if (knownMovie) {
         return knownMovie;
     }
-
 
     return {
 
@@ -340,13 +343,18 @@ async function getRecommendations(mood) {
             "recommendationMovies"
         );
 
+    if (!area || !title || !moviesContainer) {
+        console.error(
+            "Recommendation elements not found in HTML."
+        );
+
+        return;
+    }
 
     area.classList.remove("hidden");
 
-
     title.textContent =
         `${mood} recommendations`;
-
 
     moviesContainer.innerHTML = `
 
@@ -365,7 +373,6 @@ async function getRecommendations(mood) {
         </div>
 
     `;
-
 
     area.scrollIntoView({
         behavior: "smooth",
@@ -415,9 +422,11 @@ async function getRecommendations(mood) {
         ) {
 
             moviesContainer.innerHTML = `
+
                 <p style="color:#777">
                     No recommendations found.
                 </p>
+
             `;
 
             return;
@@ -449,11 +458,17 @@ async function getRecommendations(mood) {
             <div>
 
                 <p style="color:#aaa; margin-bottom:10px">
-                    ViewMate couldn't connect to the recommendation engine.
+
+                    ViewMate couldn't connect to
+                    the recommendation engine.
+
                 </p>
 
                 <p style="color:#666; font-size:12px">
-                    Make sure the Node.js backend is running on port 3000.
+
+                    Make sure the ViewMate backend
+                    is running correctly.
+
                 </p>
 
             </div>
@@ -475,9 +490,11 @@ function clearRecommendations() {
             "recommendationArea"
         );
 
+    if (!area) {
+        return;
+    }
 
     area.classList.add("hidden");
-
 
     window.scrollTo({
         top: 0,
@@ -504,7 +521,6 @@ function showMovieDetails(movie) {
         .getElementById("detailsScreen")
         .classList.remove("hidden");
 
-
     document
         .getElementById("homeNav")
         .classList.remove("active");
@@ -518,6 +534,11 @@ function showMovieDetails(movie) {
         document.getElementById(
             "movieDetails"
         );
+
+
+    if (!container) {
+        return;
+    }
 
 
     const description =
@@ -534,6 +555,7 @@ function showMovieDetails(movie) {
                 style="
                     --poster-light:
                         ${movie.light || "#555"};
+
                     --poster-dark:
                         ${movie.dark || "#202024"};
                 "
@@ -584,8 +606,11 @@ function showMovieDetails(movie) {
                     class="primary-btn"
                     onclick="showAiPicks()"
                 >
+
                     <span>✦</span>
+
                     Find another movie
+
                 </button>
 
             </div>
