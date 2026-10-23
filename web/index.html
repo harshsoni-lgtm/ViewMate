@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>ViewMate — Your Entertainment Companion</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background glow -->
+    <div class="ambient-glow glow-one"></div>
+    <div class="ambient-glow glow-two"></div>
+
+
+    <!-- NAVIGATION -->
+
+    <header class="navbar">
+
+        <div class="nav-left">
+
+            <button
+                class="logo"
+                onclick="showHome()"
+                aria-label="ViewMate Home"
+            >
+                <span class="logo-mark">V</span>
+                <span>ViewMate</span>
+            </button>
+
+            <nav class="nav-links">
+
+                <button
+                    class="nav-link active"
+                    id="homeNav"
+                    onclick="showHome()"
+                >
+                    Home
+                </button>
+
+                <button
+                    class="nav-link"
+                    id="aiNav"
+                    onclick="showAiPicks()"
+                >
+                    AI Picks
+                </button>
+
+            </nav>
+
+        </div>
+
+
+        <div class="nav-right">
+
+            <div class="status-pill">
+                <span class="status-dot"></span>
+                Ready to discover
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <main id="app">
+
+
+        <!-- ========================= -->
+        <!-- HOME SCREEN -->
+        <!-- ========================= -->
+
+        <section id="homeScreen">
+
+
+            <!-- HERO -->
+
+            <section class="hero">
+
+                <div class="hero-content">
+
+                    <div class="eyebrow">
+                        YOUR PERSONAL ENTERTAINMENT COMPANION
+                    </div>
+
+                    <h1>
+                        Stop scrolling.<br>
+                        <span>Start watching.</span>
+                    </h1>
+
+                    <p class="hero-description">
+                        ViewMate helps you discover something worth watching
+                        based on your mood, interests and what you feel like
+                        right now.
+                    </p>
+
+
+                    <div class="hero-actions">
+
+                        <button
+                            class="primary-btn"
+                            onclick="showAiPicks()"
+                        >
+                            <span>✦</span>
+                            Explore AI Picks
+                        </button>
+
+                        <button
+                            class="secondary-btn"
+                            onclick="scrollToRecommendations()"
+                        >
+                            Browse recommendations
+                            <span>↓</span>
+                        </button>
+
+                    </div>
+
+
+                    <div class="hero-meta">
+
+                        <div>
+                            <strong>4</strong>
+                            <span>moods</span>
+                        </div>
+
+                        <div class="meta-divider"></div>
+
+                        <div>
+                            <strong>∞</strong>
+                            <span>possibilities</span>
+                        </div>
+
+                        <div class="meta-divider"></div>
+
+                        <div>
+                            <strong>1</strong>
+                            <span>simple goal</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HERO VISUAL -->
+
+                <div class="hero-visual">
+
+                    <div class="hero-orbit orbit-one"></div>
+                    <div class="hero-orbit orbit-two"></div>
+
+                    <div class="hero-card main-hero-card">
+
+                        <div class="hero-card-top">
+
+                            <span class="mini-label">
+                                VIEWMATE PICK
+                            </span>
+
+                            <span class="rating">
+                                ★ 9.2
+                            </span>
+
+                        </div>
+
+
+                        <div class="hero-movie-art">
+
+                            <div class="art-shape shape-one"></div>
+                            <div class="art-shape shape-two"></div>
+                            <div class="art-shape shape-three"></div>
+
+                            <div class="art-title">
+                                INTERSTELLAR
+                            </div>
+
+                        </div>
+
+
+                        <div class="hero-card-info">
+
+                            <div>
+                                <h3>Interstellar</h3>
+
+                                <p>
+                                    Sci-Fi · Adventure · Drama
+                                </p>
+                            </div>
+
+                            <span class="play-icon">▶</span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card floating-one">
+
+                        <span>✦</span>
+
+                        <div>
+                            <small>VIEWMATE</small>
+                            <strong>Made for you</strong>
+                        </div>
+
+                    </div>
+
+
+                    <div class="floating-card floating-two">
+
+                        <span>◉</span>
+
+                        <div>
+                            <small>DISCOVER</small>
+                            <strong>Less scrolling</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- RECOMMENDED -->
+
+            <section
+                class="content-section"
+                id="recommendationsSection"
+            >
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            CURATED FOR YOU
+                        </span>
+
+                        <h2>Recommended for You</h2>
+
+                    </div>
+
+                    <button
+                        class="section-action"
+                        onclick="showAiPicks()"
+                    >
+                        Discover more
+                        <span>→</span>
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="recommendedMovies"
+                    class="movie-row"
+                ></div>
+
+            </section>
+
+
+            <!-- ACTION -->
+
+            <section class="content-section">
+
+                <div class="section-heading">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            IF YOU LIKE THE RUSH
+                        </span>
+
+                        <h2>Because You Like Action</h2>
+
+                    </div>
+
+                    <span class="row-hint">
+                        Scroll to explore →
+                    </span>
+
+                </div>
+
+
+                <div
+                    id="actionMovies"
+                    class="movie-row"
+                ></div>
+
+            </section>
+
+
+            <!-- HOW IT WORKS -->
+
+            <section class="how-section">
+
+                <div class="how-header">
+
+                    <span class="section-kicker">
+                        DISCOVERY, SIMPLIFIED
+                    </span>
+
+                    <h2>
+                        Find your next favorite<br>
+                        in three simple steps.
+                    </h2>
+
+                </div>
+
+
+                <div class="steps">
+
+                    <div class="step-card">
+
+                        <span class="step-number">01</span>
+
+                        <div class="step-icon">◉</div>
+
+                        <h3>Choose a mood</h3>
+
+                        <p>
+                            Tell ViewMate what kind of experience
+                            you're looking for.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <span class="step-number">02</span>
+
+                        <div class="step-icon">✦</div>
+
+                        <h3>Get recommendations</h3>
+
+                        <p>
+                            ViewMate connects your choice to its
+                            recommendation engine.
+                        </p>
+
+                    </div>
+
+
+                    <div class="step-card">
+
+                        <span class="step-number">03</span>
+
+                        <div class="step-icon">▶</div>
+
+                        <h3>Start watching</h3>
+
+                        <p>
+                            Pick something interesting and jump
+                            straight into the details.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- AI PICKS SCREEN -->
+        <!-- ========================= -->
+
+        <section
+            id="aiPicksScreen"
+            class="screen hidden"
+        >
+
+            <div class="ai-header">
+
+                <button
+                    class="back-link"
+                    onclick="showHome()"
+                >
+                    ← Back to Home
+                </button>
+
+
+                <div class="ai-title">
+
+                    <span class="ai-badge">
+                        <span>✦</span>
+                        VIEWMATE PICKS
+                    </span>
+
+                    <h1>
+                        What's your<br>
+                        <span>mood tonight?</span>
+                    </h1>
+
+                    <p>
+                        Pick a feeling. We'll handle the scrolling.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="mood-grid">
+
+
+                <button
+                    class="mood-card mood-mind"
+                    onclick="getRecommendations('Mind-bending')"
+                >
+
+                    <div class="mood-number">01</div>
+
+                    <div class="mood-icon">◈</div>
+
+                    <div class="mood-content">
+
+                        <h3>Mind-bending</h3>
+
+                        <p>
+                            Twist your perception.
+                        </p>
+
+                    </div>
+
+                    <span class="mood-arrow">↗</span>
+
+                </button>
+
+
+                <button
+                    class="mood-card mood-action"
+                    onclick="getRecommendations('Action')"
+                >
+
+                    <div class="mood-number">02</div>
+
+                    <div class="mood-icon">ϟ</div>
+
+                    <div class="mood-content">
+
+                        <h3>Action</h3>
+
+                        <p>
+                            Keep the adrenaline going.
+                        </p>
+
+                    </div>
+
+                    <span class="mood-arrow">↗</span>
+
+                </button>
+
+
+                <button
+                    class="mood-card mood-scifi"
+                    onclick="getRecommendations('Sci-Fi')"
+                >
+
+                    <div class="mood-number">03</div>
+
+                    <div class="mood-icon">✧</div>
+
+                    <div class="mood-content">
+
+                        <h3>Sci-Fi</h3>
+
+                        <p>
+                            Explore beyond reality.
+                        </p>
+
+                    </div>
+
+                    <span class="mood-arrow">↗</span>
+
+                </button>
+
+
+                <button
+                    class="mood-card mood-family"
+                    onclick="getRecommendations('Family')"
+                >
+
+                    <div class="mood-number">04</div>
+
+                    <div class="mood-icon">♡</div>
+
+                    <div class="mood-content">
+
+                        <h3>Family</h3>
+
+                        <p>
+                            Something everyone can enjoy.
+                        </p>
+
+                    </div>
+
+                    <span class="mood-arrow">↗</span>
+
+                </button>
+
+            </div>
+
+
+            <!-- RECOMMENDATION RESULT -->
+
+            <section
+                id="recommendationArea"
+                class="recommendation-result hidden"
+            >
+
+                <div class="result-heading">
+
+                    <div>
+
+                        <span class="section-kicker">
+                            VIEWMATE FOUND
+                        </span>
+
+                        <h2 id="recommendationTitle">
+                            Recommendations
+                        </h2>
+
+                    </div>
+
+                    <button
+                        class="refresh-btn"
+                        onclick="clearRecommendations()"
+                    >
+                        Choose another mood
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="recommendationMovies"
+                    class="movie-row recommendation-row"
+                ></div>
+
+            </section>
+
+        </section>
+
+
+        <!-- ========================= -->
+        <!-- MOVIE DETAILS -->
+        <!-- ========================= -->
+
+        <section
+            id="detailsScreen"
+            class="screen hidden"
+        >
+
+            <div
+                id="movieDetails"
+                class="details-container"
+            ></div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div class="footer-logo">
+
+            <span class="logo-mark">V</span>
+
+            <span>ViewMate</span>
+
+        </div>
+
+        <p>
+            Less scrolling. More watching.
+        </p>
+
+        <span class="footer-note">
+            Built for the future of TV discovery.
+        </span>
+
+    </footer>
+
+
+    <script src="app.js"></script>
+
+</body>
+</html>
